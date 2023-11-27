@@ -4,16 +4,16 @@ let app = express();
 
 dotenv.config();
 
-const filePath = __dirname + '/views';
+// const filePath = __dirname + '/views';
 
 app.use(logger); // Logger middleware
-app.use('/public', express.static(__dirname + '/public'));
 
+app.use(express.static(__dirname + '/public'));
 
 // Static server
-app.get('/' ,function(req, res){
-  res.sendFile(filePath)
-});
+// app.get('/', function (req, res) {
+//   res.sendFile(filePath)
+// });
 
 // JSON server
 app.get('/json', function (req, res) {
@@ -32,10 +32,18 @@ app.get('/now', function (req, res, next) {
 });
 
 // Echo server
-app.get('/:word/echo', function(req, res){
-  res.json({echo: req.params.word})
+app.get('/:word/echo', function (req, res) {
+  res.json({ echo: req.params.word })
 })
 
+//Query params
+app.route('/name')
+  .get(function (req, res) {
+    return res.json({ name: `${req.query.first} ${req.query.last}` })
+  })
+  .post(function (req, res) {
+    res.json({name:`${req.body.first} ${req.body.last}`});
+  })
 
 // Middleware function
 function logger(req, res, next) {
