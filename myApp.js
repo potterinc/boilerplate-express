@@ -3,6 +3,9 @@ let app = express();
 
 console.log('Hello World');
 
+app.get('/', function (req, res) {
+  res.send('Hello Expres');
+});
 
 
 
@@ -36,4 +39,5 @@ console.log('Hello World');
 
 
 
- module.exports = app;
+
+module.exports = app;
