@@ -1,5 +1,6 @@
 let express = require('express');
-let dotenv = require('dotenv');
+const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
 let app = express();
 
 dotenv.config();
@@ -7,8 +8,8 @@ dotenv.config();
 // const filePath = __dirname + '/views';
 
 app.use(logger); // Logger middleware
-
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({extended:false}));
 
 // Static server
 // app.get('/', function (req, res) {
